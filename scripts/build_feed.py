@@ -4,6 +4,7 @@ import os
 import re
 import hashlib
 from decimal import Decimal, InvalidOperation
+
 import requests
 
 # ======================
@@ -14,7 +15,7 @@ EXPORT_URL = os.getenv(
     "http://154.48.226.95:5001/admin/Product/export_csv",
 )
 
-# 你的源 CSV 价格列名已确认
+# 你的源 CSV 价格列名
 PRICE_COL = "Discount Price"
 
 CURRENCY_BY_MARKET = {
@@ -26,6 +27,17 @@ CURRENCY_BY_MARKET = {
     "ES": "EUR",
     "CA": "CAD",
     "JP": "JPY",
+}
+
+FLAG_BY_MARKET = {
+    "US": "🇺🇸",
+    "UK": "🇬🇧",
+    "DE": "🇩🇪",
+    "FR": "🇫🇷",
+    "IT": "🇮🇹",
+    "ES": "🇪🇸",
+    "CA": "🇨🇦",
+    "JP": "🇯🇵",
 }
 
 # Meta Feed 输出字段（加入 item_group_id 便于归组）
@@ -41,6 +53,7 @@ OUT_FIELDS = [
     "image_link",
     "brand",
 ]
+
 
 # ======================
 # Helpers
@@ -128,12 +141,14 @@ def build_rows(src_rows: list[dict]) -> list[dict]:
 
         price_raw = src.get(PRICE_COL)
         price = parse_price(price_raw)
+
         # 你坚持 0 合法：允许 0；如果解析不到，默认 0
         if price is None:
             price = Decimal("0")
 
         # item_group_id 用于归组（同一 market+asin 的多条记录属于同一组）
         base_id = f"{market}_{asin}"
+
         unique_id = stable_unique_id(
             base_id=base_id,
             store=store,
@@ -145,22 +160,22 @@ def build_rows(src_rows: list[dict]) -> list[dict]:
             status=status,
         )
 
-        # 标题附加国家标识，方便你在 WhatsApp/目录里搜索
-        title2 = f"{title} ({market})"
+        # 标题：国家 + 国旗 + 标题（按你要求： (CA)🇨🇦加拿大蓝色拉力带）
+        flag = FLAG_BY_MARKET.get(market, "")
+        title2 = f"({market}){flag}{title}"
 
-        # ✅ 描述：固定显示 Keyword / Store，其它不变
+        # 描述：固定展示 Keyword + Store；remark 以 “remark:xxx” 形式展示
         lines: list[str] = []
         if keyword:
             lines.append(f"Keyword: {keyword}")
         if store:
             lines.append(f"Store: {store}")
-        # 备注仍然保留（如果你不想显示备注，我可以再给你“只两行”的版本）
         if remark:
-            lines.append(remark)
+            lines.append(f"remark: {remark}")
 
         desc = "\n".join(lines).strip()
 
-        # 这里统一给 in stock/new（不影响你价格=0）
+        # 这里统一给 in stock/new（你也可以按 status 决定）
         availability = "in stock"
         condition = "new"
 
@@ -179,8 +194,15 @@ def build_rows(src_rows: list[dict]) -> list[dict]:
             }
         )
 
-    # 排序：你要“重复情况下再排序”，这里只排序不去重
-    out.sort(key=lambda r: (r["item_group_id"], r["title"], r["link"], r["id"]))
+    # 排序：保留重复项，仅调整顺序（不会删除任何记录）
+    out.sort(
+        key=lambda r: (
+            r["item_group_id"],      # market_asin 归组
+            r["title"],              # 标题
+            r["link"],               # 链接
+            r["id"],                 # 最后用唯一 id 保证稳定排序
+        )
+    )
     return out
 
 
