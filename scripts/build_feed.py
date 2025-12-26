@@ -66,9 +66,7 @@ def parse_price(v) -> Decimal | None:
 
 
 def normalize_market(market: str) -> str:
-    m = (market or "").strip().upper()
-    # 可按你需要补充别名映射
-    return m
+    return (market or "").strip().upper()
 
 
 def normalize_asin(asin: str) -> str:
@@ -150,41 +148,23 @@ def build_rows(src_rows: list[dict]) -> list[dict]:
         # 标题附加国家标识，方便你在 WhatsApp/目录里搜索
         title2 = f"{title} ({market})"
 
-        # 描述：优先 remark，其次拼 keyword
-        # 描述：固定展示 Keyword + Store，其它不变
-# 描述：固定展示 Keyword + Store，其它不变
-lines = []
-if keyword:
-    lines.append(f"Keyword: {keyword}")
-if store:
-    lines.append(f"Store: {store}")
+        # ✅ 描述：固定显示 Keyword / Store，其它不变
+        lines: list[str] = []
+        if keyword:
+            lines.append(f"Keyword: {keyword}")
+        if store:
+            lines.append(f"Store: {store}")
+        # 备注仍然保留（如果你不想显示备注，我可以再给你“只两行”的版本）
+        if remark:
+            lines.append(remark)
 
-# 备注仍然保留
-if remark:
-    lines.append(remark)
+        desc = "\n".join(lines).strip()
 
-desc = "\n".join(lines).strip()
+        # 这里统一给 in stock/new（不影响你价格=0）
+        availability = "in stock"
+        condition = "new"
 
-# 这里统一给 in stock/new（你也可以按 status 决定）
-availability = "in stock"
-condition = "new"
-
-out.append(
-    {
-        "id": unique_id,
-        "item_group_id": base_id,
-        "title": title2,
-        "description": desc,
-        "availability": availability,
-        "condition": condition,
-        "price": f"{price:.2f} {currency}",
-        "link": link,
-        "image_link": image_url,
-        "brand": store or "Generic",
-    }
-)
-
-
+        out.append(
             {
                 "id": unique_id,
                 "item_group_id": base_id,
@@ -199,7 +179,7 @@ out.append(
             }
         )
 
-    # 排序：你想“重复情况下再排序”，这里按组+标题+链接排序（仅影响文件顺序，不影响 Meta 处理逻辑）
+    # 排序：你要“重复情况下再排序”，这里只排序不去重
     out.sort(key=lambda r: (r["item_group_id"], r["title"], r["link"], r["id"]))
     return out
 
