@@ -151,9 +151,19 @@ def build_rows(src_rows: list[dict]) -> list[dict]:
         title2 = f"{title} ({market})"
 
         # 描述：优先 remark，其次拼 keyword
-        desc = remark or ""
-        if keyword and keyword not in desc:
-            desc = (keyword + " " + desc).strip()
+        # 描述：固定展示 Keyword + Store，其它不变
+lines = []
+if keyword:
+    lines.append(f"Keyword: {keyword}")
+if store:
+    lines.append(f"Store: {store}")
+
+# 备注仍然保留（不改变你原本 remark 的使用方式）
+if remark:
+    lines.append(remark)
+
+desc = "\n".join(lines).strip()
+
 
         # 这里统一给 in stock/new（你也可以按 status 决定）
         availability = "in stock"
