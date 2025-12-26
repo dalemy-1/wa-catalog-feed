@@ -1,5 +1,5 @@
-﻿id,title,description,availability,condition,price,link,image_link,brand
-IT_B0F1CKJ5Q1,意大利成用 (IT),vibratore Need Text Review,in stock,new,0.00 EUR,https://amzn.to/4amWQB4,https://m.media-amazon.com/images/I/61ilhcaxtKL._AC_SX425_.jpg,TRADILLAStore
-IT_B0FFMFG7FT,意大利止吠 (IT),Ultrasuoni per Cani Dispositivo Need Text Review,in stock,new,0.00 EUR,https://amzn.to/4pMdTRR,https://m.media-amazon.com/images/I/71r+OQEVdjL._AC_SX679_.jpg,FuQiang
-IT_B0FM3WQYL4,意大利驱鼠器 (IT),Ultrasuoni per Topi Need Text Review,in stock,new,0.00 EUR,https://amzn.to/48ybK4W,https://m.media-amazon.com/images/I/61+KwTL6QlL._AC_SX679_.jpg,Peheng Co Ltd
-IT_B0FMRNC2W8,意大利地钉 (IT),4 pcs repellente per talp Need Text Review,in stock,new,0.00 EUR,https://amzn.to/48m0eda,https://m.media-amazon.com/images/I/71lAom6CBML._AC_SX679_.jpg,ShoMoZ Store
+﻿id,item_group_id,title,description,availability,condition,price,link,image_link,brand
+IT_B0F1CKJ5Q1_eb49bf1dbb,IT_B0F1CKJ5Q1,意大利成用 (IT),vibratore Need Text Review,in stock,new,0.00 EUR,https://amzn.to/4amWQB4,https://m.media-amazon.com/images/I/61ilhcaxtKL._AC_SX425_.jpg,TRADILLAStore
+IT_B0FFMFG7FT_ee6da69ba7,IT_B0FFMFG7FT,意大利止吠 (IT),Ultrasuoni per Cani Dispositivo Need Text Review,in stock,new,0.00 EUR,https://amzn.to/4pMdTRR,https://m.media-amazon.com/images/I/71r+OQEVdjL._AC_SX679_.jpg,FuQiang
+IT_B0FM3WQYL4_23c411a785,IT_B0FM3WQYL4,意大利驱鼠器 (IT),Ultrasuoni per Topi Need Text Review,in stock,new,0.00 EUR,https://amzn.to/48ybK4W,https://m.media-amazon.com/images/I/61+KwTL6QlL._AC_SX679_.jpg,Peheng Co Ltd
+IT_B0FMRNC2W8_3c37723318,IT_B0FMRNC2W8,意大利地钉 (IT),4 pcs repellente per talp Need Text Review,in stock,new,0.00 EUR,https://amzn.to/48m0eda,https://m.media-amazon.com/images/I/71lAom6CBML._AC_SX679_.jpg,ShoMoZ Store
