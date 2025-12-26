@@ -17,7 +17,6 @@ EXPORT_URL = os.getenv(
 
 PRICE_COL = os.getenv("PRICE_COL", "Discount Price")
 
-# 你要展示哪些国家（顺序=页面顺序）
 MARKETS = os.getenv("MARKETS", "US,UK,DE,FR,IT,ES,CA,JP").split(",")
 
 MARKET_NAMES = {
@@ -57,8 +56,8 @@ CURRENCY_BY_MARKET = {
 WA_LINK = "https://wa.me/message/DFLXQVO45JMMB1"
 TG_LINK = "https://t.me/dalemyrong"
 
-# 输出目录（GitHub Pages 常用 docs/）
 OUT_DIR = "docs"
+
 
 # ======================
 # Helpers
@@ -66,11 +65,14 @@ OUT_DIR = "docs"
 def norm(s: str) -> str:
     return (s or "").strip()
 
+
 def normalize_market(m: str) -> str:
     return norm(m).upper()
 
+
 def normalize_asin(a: str) -> str:
     return norm(a).upper()
+
 
 def parse_price(v) -> Decimal:
     # 允许 0，无法解析则默认 0
@@ -88,8 +90,8 @@ def parse_price(v) -> Decimal:
     except (InvalidOperation, ValueError):
         return Decimal("0")
 
+
 def safe_html(s: str) -> str:
-    # 最小转义，避免破坏页面
     return (
         (s or "")
         .replace("&", "&amp;")
@@ -98,19 +100,26 @@ def safe_html(s: str) -> str:
         .replace('"', "&quot;")
     )
 
+
+def clean_title_suffix_market(title: str) -> str:
+    """
+    你原来的 title 可能带 (CA)/(US) 这种后缀；为避免重复，先去掉末尾形如 "(XX)"。
+    """
+    t = norm(title)
+    return re.sub(r"\s*\([A-Z]{2}\)\s*$", "", t).strip()
+
+
 def build_desc(keyword: str, store: str, remark: str) -> str:
-    # 按你现在 WhatsApp 目录里想要的格式：
-    # Keyword: xxx
-    # Store: yyy
-    # remark: Need Text Review
+    # 按你要求：Keyword / Store 保持原样；remark 前缀改为 remark:Need Text Review（冒号后不加空格）
     lines = []
     if keyword:
         lines.append(f"Keyword: {keyword}")
     if store:
         lines.append(f"Store: {store}")
     if remark:
-        lines.append(f"remark: {remark}")
+        lines.append(f"remark:{remark}")
     return "\n".join(lines).strip()
+
 
 def read_source_rows() -> list[dict]:
     r = requests.get(EXPORT_URL, timeout=60)
@@ -123,66 +132,68 @@ def read_source_rows() -> list[dict]:
         raise RuntimeError(f"找不到价格列 '{PRICE_COL}'，当前表头: {reader.fieldnames}")
     return list(reader)
 
+
 def map_row(src: dict) -> dict | None:
-    """
-    期望你的源 CSV 至少包含：
-    market, asin, title, link, image_url, keyword, store, remark, Discount Price
-    """
+    # 你的字段名就是这些：market asin title keyword store remark link image_url Discount Price Commission status
     market = normalize_market(src.get("market"))
     asin = normalize_asin(src.get("asin"))
-    title = norm(src.get("title"))
-    link = norm(src.get("link"))
-    image_url = norm(src.get("image_url"))
+
+    title_raw = norm(src.get("title"))
+    title_clean = clean_title_suffix_market(title_raw)
+
     keyword = norm(src.get("keyword"))
     store = norm(src.get("store"))
     remark = norm(src.get("remark"))
 
-    if not market or not asin or not title or not link or not image_url:
+    link = norm(src.get("link"))
+    image_url = norm(src.get("image_url"))
+
+    if not market or not asin or not title_clean or not link or not image_url:
         return None
 
     price = parse_price(src.get(PRICE_COL))
     currency = CURRENCY_BY_MARKET.get(market, "USD")
 
-    # 标题格式： (CA)🇨🇦加拿大蓝色拉力带
     flag = FLAGS.get(market, "")
-    title_show = f"({market}){flag}{title}"
+    cn = MARKET_NAMES.get(market, market)
+
+    # 标题格式： (CA)🇨🇦加拿大蓝色拉力腰带
+    title_show = f"({market}){flag}{cn}{title_clean}"
 
     return {
         "market": market,
         "asin": asin,
         "title": title_show,
-        "title_raw": title,
-        "keyword": keyword,
-        "store": store,
-        "remark": remark,
         "desc": build_desc(keyword, store, remark),
         "price": f"{price:.2f} {currency}",
         "link": link,
         "image": image_url,
     }
 
+
 def group_by_market(rows: list[dict]) -> dict[str, list[dict]]:
     by: dict[str, list[dict]] = {}
     for r in rows:
-        m = r["market"]
-        by.setdefault(m, []).append(r)
+        by.setdefault(r["market"], []).append(r)
 
-    # 排序：保留重复项，仅排序（你要求不要去重）
+    # 仅排序，不去重（保留重复项）
     for m, items in by.items():
         items.sort(key=lambda x: (x["asin"], x["title"], x["link"], x["image"]))
     return by
 
+
 def svg_whatsapp() -> str:
-    # 简洁 WhatsApp 图标（SVG）
     return """<svg viewBox="0 0 32 32" aria-hidden="true">
 <path d="M19.11 17.41c-.2-.1-1.2-.59-1.38-.66-.18-.07-.31-.1-.44.1-.13.2-.5.66-.62.79-.11.13-.22.15-.42.05-.2-.1-.85-.31-1.62-.99-.6-.54-1-1.2-1.11-1.4-.11-.2-.01-.31.09-.41.09-.09.2-.22.31-.33.1-.11.13-.2.2-.33.07-.13.03-.25-.02-.35-.05-.1-.44-1.06-.6-1.45-.16-.38-.32-.33-.44-.33h-.38c-.13 0-.35.05-.53.25-.18.2-.7.68-.7 1.67s.72 1.95.82 2.09c.1.13 1.41 2.15 3.41 3.01.48.21.86.33 1.15.42.48.15.92.13 1.27.08.39-.06 1.2-.49 1.37-.97.17-.48.17-.89.12-.97-.05-.08-.18-.13-.38-.23z"/>
 <path d="M16 3C8.83 3 3 8.83 3 16c0 2.53.72 4.89 1.97 6.89L3 29l6.28-1.9A12.94 12.94 0 0 0 16 29c7.17 0 13-5.83 13-13S23.17 3 16 3zm0 23.5c-2.1 0-4.04-.62-5.67-1.68l-.4-.25-3.73 1.13 1.2-3.63-.26-.42A10.44 10.44 0 0 1 5.5 16C5.5 10.21 10.21 5.5 16 5.5S26.5 10.21 26.5 16 21.79 26.5 16 26.5z"/>
 </svg>"""
 
+
 def svg_telegram() -> str:
     return """<svg viewBox="0 0 32 32" aria-hidden="true">
 <path d="M28.5 6.1 24.6 26c-.3 1.4-1.1 1.7-2.2 1.1l-6.1-4.5-3 2.9c-.3.3-.6.6-1.2.6l.4-6.4 11.7-10.6c.5-.4-.1-.7-.8-.3L8.9 18.1l-6.2-1.9c-1.3-.4-1.4-1.3.3-1.9L26.9 5c1.1-.4 2 .3 1.6 1.1z"/>
 </svg>"""
+
 
 def page_shell(title: str, nav_html: str, body_html: str, updated_at: str) -> str:
     css = """
@@ -255,9 +266,12 @@ a{color:inherit;text-decoration:none}
 </body>
 </html>"""
 
+
 def build_nav(active_market: str | None) -> str:
     pills = []
-    pills.append(f'<a class="pill {"active" if active_market is None else ""}" href="index.html">All</a>')
+    pills.append(
+        f'<a class="pill {"active" if active_market is None else ""}" href="index.html">All</a>'
+    )
     for m in MARKETS:
         mm = m.strip().upper()
         name = MARKET_NAMES.get(mm, mm)
@@ -267,6 +281,7 @@ def build_nav(active_market: str | None) -> str:
             f'<a class="pill {"active" if active_market==mm else ""}" href="{href}">{flag}{safe_html(name)} ({mm})</a>'
         )
     return "\n".join(pills)
+
 
 def product_grid(items: list[dict]) -> str:
     cards = []
@@ -284,15 +299,18 @@ def product_grid(items: list[dict]) -> str:
   </div>
 </div>
 """)
-    return f'<div class="grid">\n' + "\n".join(cards) + "\n</div>"
+    return '<div class="grid">\n' + "\n".join(cards) + "\n</div>"
+
 
 def write_file(path: str, content: str) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         f.write(content)
 
+
 def main():
     src_rows = read_source_rows()
+
     mapped = []
     for r in src_rows:
         x = map_row(r)
@@ -303,13 +321,12 @@ def main():
 
     updated_at = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
 
-    # 1) index: All Products（合并展示）
+    # index: 合并展示
     all_items = []
     for m in MARKETS:
         mm = m.strip().upper()
         all_items.extend(by_market.get(mm, []))
 
-    # 合并页排序：按 market 再按 asin
     all_items.sort(key=lambda x: (x["market"], x["asin"], x["title"], x["link"]))
 
     nav = build_nav(active_market=None)
@@ -319,7 +336,7 @@ def main():
         page_shell("Dalemy · All Products", nav, body, updated_at),
     )
 
-    # 2) 每个国家单独页面
+    # 各国家单页
     for m in MARKETS:
         mm = m.strip().upper()
         items = by_market.get(mm, [])
@@ -331,7 +348,11 @@ def main():
             page_shell(title, navm, bodym, updated_at),
         )
 
-    print(f"done: total={len(mapped)}; by_market={{" + ", ".join(f"{k}:{len(v)}" for k,v in by_market.items()) + "}}")
+    print(
+        f"done: total={len(mapped)}; by_market="
+        + str({k: len(v) for k, v in by_market.items()})
+    )
+
 
 if __name__ == "__main__":
     main()
