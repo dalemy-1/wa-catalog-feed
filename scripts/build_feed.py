@@ -8,12 +8,8 @@ from decimal import Decimal, InvalidOperation
 EXPORT_URL = os.getenv("EXPORT_URL", "http://154.48.226.95:5001/admin/Product/export_csv")
 
 # 你说价格以“Discount Price”列为准
-PRICE_COL_CANDIDATES = [
-    "Discount Price",
-    "discount_price",
-    "DiscountPrice",
-    "Discount",  # 如果你实际表头就是 Discount
-]
+PRICE_COL_CANDIDATES = ["Discount Price"]
+
 
 CURRENCY_BY_MARKET = {
     "US": "USD",
