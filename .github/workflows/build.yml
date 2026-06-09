@@ -33,7 +33,7 @@ jobs:
 
       - name: Build feed
         env:
-          EXPORT_URL: "http://154.48.226.95:5001/admin/Product/export_csv"
+          EXPORT_URL: "http://154.48.226.28:5001/admin/Product/export_csv"
         run: |
           python scripts/build_feed.py
 
