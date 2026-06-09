@@ -12,7 +12,7 @@ import requests
 # ======================
 EXPORT_URL = os.getenv(
     "EXPORT_URL",
-    "http://154.48.226.95:5001/admin/Product/export_csv",
+    "http://154.48.226.28:5001/admin/Product/export_csv",
 )
 
 # 你的源 CSV 价格列名
