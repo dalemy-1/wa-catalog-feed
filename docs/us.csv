@@ -1,7 +1,4 @@
 ﻿id,item_group_id,title,description,availability,condition,price,link,image_link,brand
-US_1071187048_3bf9033118,US_1071187048,(US)🇺🇸美国沃尔玛篮球架,"Keyword: basketball hoop for kids
-Store: Bttoy shop
-remark: Need Text Review",in stock,new,0.00 USD,https://www.walmart.com/ip/Babyltrl-Indoor-Kids-Basketball-Hoop-Electronic-Scoreboard-Mini-Wall-Mounted-Basketball-Hoop-4-Balls-Basketball-Toys-Boys-Girls-Bedroom-Office-Door/1071187048?classType=REGULAR&selectedSellerId=101100792,http://154.48.226.28:5001/image/20260520/c15017460dc04981a15c11f6c5bbc2f4.png,Bttoy shop
 US_1337675927_d6f33c2f0c,US_1337675927,(US)🇺🇸美国沃尔玛红光面膜,"Keyword: Red Light Mask
 Store: Morfone Official
 remark: Need Text Review",in stock,new,0.00 USD,https://www.walmart.com/ip/seort/13376759273,http://154.48.226.28:5001/image/20260123/8953792fad404420a91cb73b79e5cb10.png,Morfone Official
@@ -59,6 +56,9 @@ US_B0D7QNMBF3_595d1b1e47,US_B0D7QNMBF3,(US)🇺🇸美国训狗器,"Keyword: Dog
 Store: E-Hottest",in stock,new,0.00 USD,https://amzn.to/40BjlMy,https://m.media-amazon.com/images/I/71TcIdZc3SL._AC_SX679_.jpg,E-Hottest
 US_B0DD6C46DB_2bf18638ab,US_B0DD6C46DB,(US)🇺🇸美国汽车配件,"Keyword: 799584 Carburetor
 Store: JAVENYIMAN-US",in stock,new,0.00 USD,https://amzn.to/4kY4t4g,https://m.media-amazon.com/images/I/81bSsWi96wL._AC_SY450_.jpg,JAVENYIMAN-US
+US_B0DF2TD2V8_3827d9a96c,US_B0DF2TD2V8,(US)🇺🇸美国电动卷烟器,"Keyword: pre roll machine
+Store: Capo Lily
+remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/4aV4gvb,https://m.media-amazon.com/images/I/71sLgc5hQ1L._AC_SL1500_.jpg,Capo Lily
 US_B0DX1372V4_0fd96741b8,US_B0DX1372V4,(US)🇺🇸美国扳手工具图评,"Keyword: plumbing tools
 Store: FeiXingXin
 remark: Need Image Review",in stock,new,0.00 USD,https://amzn.to/3MNm8zb,"https://m.media-amazon.com/images/I/716vMCI-HNL._AC_SX679_PIbundle-12,TopRight,0,0_SH20_.jpg",FeiXingXin
@@ -92,6 +92,9 @@ Need Text Review One-star review, requires return, payment of commission",in sto
 US_B0FNMTQHLN_e0982b558a,US_B0FNMTQHLN,(US)🇺🇸美国扳手工具图评,"Keyword: faucet wrench
 Store: FeiXingXin
 remark: Need Image Review",in stock,new,0.00 USD,https://amzn.to/407oZGb,https://m.media-amazon.com/images/I/71VtPHdZYzL._AC_SX569_.jpg,FeiXingXin
+US_B0FQNTTVD5_d4ef7efd50,US_B0FQNTTVD5,(US)🇺🇸美国研磨滚筒,"Keyword: cone loader
+Store: Capo Lily
+remark: Need Text Review",in stock,new,0.00 USD,https://www.amazon.com/dp/B0FQNTTVD5,https://m.media-amazon.com/images/I/61ay2eQJOdL._AC_SL1500_.jpg,Capo Lily
 US_B0FQPMQTK8_393fd99d27,US_B0FQPMQTK8,(US)🇺🇸美国点烟器,"Keyword: cigarette lighter plug
 Store: LIPOERA
 remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/3N8CKBy,https://m.media-amazon.com/images/I/61rSJXcHuQL._AC_SL1280_.jpg,LIPOERA
@@ -155,6 +158,12 @@ remark: Need Rating",in stock,new,0.00 USD,https://amzn.to/3T96zo4,https://m.med
 US_B0GRTXYTW4_cbb9bde8fc,US_B0GRTXYTW4,(US)🇺🇸美国竹筒烟盒,"Keyword: smell proof cigarette case
 Store: JIAKOU
 remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/4bGg0ll,https://m.media-amazon.com/images/I/61aXyXfirBL._SL1254_.jpg,JIAKOU
+US_B0GRTXYTW4_26b1d5edc0,US_B0GRTXYTW4,(US)🇺🇸美国竹筒烟盒免评点星,"Keyword: smell proof cigarette case
+Store: JIAKOU
+remark: Need Rating",in stock,new,0.00 USD,https://amzn.to/4bGg0ll,https://m.media-amazon.com/images/I/61aXyXfirBL._SL1254_.jpg,JIAKOU
+US_B0GV376QZW_196414b376,US_B0GV376QZW,(US)🇺🇸美国浴室置物架,"Keyword: corner shower caddy standing
+Store: danpu store
+remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/3U3cLPa,https://m.media-amazon.com/images/I/71umMTc4eXL._AC_SL1500_.jpg,danpu store
 US_B0GVYKK8ZP_adf216aa34,US_B0GVYKK8ZP,(US)🇺🇸美国嵌甲矫正贴,"Keyword: ingrown toenail corrector
 Store: JY MEDICAL
 remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/3RuhOH5,https://m.media-amazon.com/images/I/71rWBzzj74L._SL1500_.jpg,JY MEDICAL
@@ -195,27 +204,15 @@ remark: No Review
 Size:
 
 iPhone 17",in stock,new,0.00 USD,https://amzn.to/4vIg4Jx,https://m.media-amazon.com/images/I/81CSRrJ2ZhL._AC_SL1500_.jpg,ORETech Official-US
-US_B0H2YHDT2R_7b589d21b1,US_B0H2YHDT2R,(US)🇺🇸美国硬线套件,"Keyword: dashcam hardwire kit
-Store: xiamenshichenshanzhishukejiyouxiangongsi
-remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/4bY06mA,https://m.media-amazon.com/images/I/71ftVnH0lrL._AC_SL1500_.jpg,xiamenshichenshanzhishukejiyouxiangongsi
 US_B0H392M241_94bc2be42b,US_B0H392M241,(US)🇺🇸美国门牌号码,"Keyword: Stainless Steel Address House Number
 Store: Lingy Store
 remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/4vTaN1u,https://m.media-amazon.com/images/I/71DgbG9j0SL._AC_SL1500_.jpg,Lingy Store
 US_B0H67CMWC6_1826d312cd,US_B0H67CMWC6,(US)🇺🇸美国果蝇诱捕器,"Keyword: fly traps indoor for home
 Store: Apex Spirits LLC
 remark: Need Text Review",in stock,new,0.00 USD,https://link.amazon/B0ae8Ihsk,https://m.media-amazon.com/images/I/71PABdOt+WL._AC_SL1500_.jpg,Apex Spirits LLC
-US_B0H6M991YQ_10774c480c,US_B0H6M991YQ,(US)🇺🇸美国地毯贴包税,"Keyword: Non Slip Rug Pad Gripper 4 PCS
-Store: angxinhun
-remark: Need Text Review",in stock,new,0.00 USD,https://link.amazon/B02n9IU5c,https://m.media-amazon.com/images/I/710OrD+AiTL._AC_SL1500_.jpg,angxinhun
-US_B0H6PZLYKK_725e28e76e,US_B0H6PZLYKK,(US)🇺🇸美国礼品包装纸包税,"Keyword: Pearlescent Tissue Paper
-Store: SHANHEXING
-remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/3Uq78dP,https://m.media-amazon.com/images/I/71Mqos2HJyL._AC_SL1500_.jpg,SHANHEXING
 US_B0H7X7Z7CT_486cd034bb,US_B0H7X7Z7CT,(US)🇺🇸美国果蝇诱捕器,"Keyword: fly traps indoor for home
 Store: Apex Spirits LLC
 remark: Need Text Review",in stock,new,0.00 USD,https://link.amazon/B01kBM9hB,https://m.media-amazon.com/images/I/718Dp3g80AL._AC_SL1500_.jpg,Apex Spirits LLC
-US_B0H8RM2Q6Y_60c89c0075,US_B0H8RM2Q6Y,(US)🇺🇸美国戒指,"Keyword: https://www.amazon.com/s?k=love+ring&hidden-keywords=B0H8RTYBCB&ref=nb_sb_noss_1
-Store: yiwushixiaozaidianzishangwuyouxiangongsi
-remark: Need Text Review",in stock,new,0.00 USD,https://amzn.to/4yUhEKl,https://m.media-amazon.com/images/I/41Y8I0D7nmL._AC_SY535_.jpg,yiwushixiaozaidianzishangwuyouxiangongsi
 US_B0H8RM2Q6Y_11349bf59f,US_B0H8RM2Q6Y,(US)🇺🇸美国戒指免评rating,"Keyword: https://www.amazon.com/s?k=love+ring&hidden-keywords=B0H8RTYBCB&ref=nb_sb_noss_1
 Store: yiwushixiaozaidianzishangwuyouxiangongsi
 remark: Need Rating",in stock,new,0.00 USD,https://amzn.to/4yUhEKl,https://m.media-amazon.com/images/I/41Y8I0D7nmL._AC_SY535_.jpg,yiwushixiaozaidianzishangwuyouxiangongsi
